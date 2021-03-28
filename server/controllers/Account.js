@@ -1,5 +1,4 @@
 const models = require('../models');
-
 const { Account } = models;
 
 const loginPage = (req, res) => {
@@ -71,7 +70,9 @@ const signup = (request, response) => {
 
       return res.status(400).json({ error: 'An error occured' });
     });
-  });
+
+        
+    })
 };
 
 module.exports.loginPage = loginPage;
