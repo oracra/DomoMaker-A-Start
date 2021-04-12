@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-
 mongoose.Promise = global.Promise;
 const _ = require('underscore');
 
@@ -33,6 +32,7 @@ const DomoSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+
 });
 
 DomoSchema.statics.toAPI = (doc) => ({

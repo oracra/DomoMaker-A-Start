@@ -1,9 +1,16 @@
 const makerPage = (req, res) => {
-  res.render('app');
+  Domo.DomoModel.findByOwner(req.session.account._id, (err, docs) => {
+    if (err) {
+      console.log(err);
+      return res.status(400).json({ error: 'An error occured' });
+    }
+
+    return res.render('app',{csrfToken: req.csrfToken() , domos: docs});
+  });
 };
 const models = require('../models');
 
-const { Domo } = models;
+const Domo = models.Domo;
 
 const makeDomo = (req, res) => {
   if (!req.body.name || !req.body.age) {
@@ -21,7 +28,7 @@ const makeDomo = (req, res) => {
 
   const domoPromise = newDomo.save();
 
-  domoPromise.then(() => res.json({ redurect: '/maker' }));
+  domoPromise.then(() => res.json({ redirect: '/maker' }));
 
   domoPromise.catch((err) => {
     console.log(err);
